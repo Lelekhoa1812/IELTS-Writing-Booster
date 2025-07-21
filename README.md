@@ -4,6 +4,7 @@
 
 IELTS Writing Booster is your personal, AI-powered writing coach designed to help you reach your dream band score. Whether you're aiming for a 6.0 or striving for a perfect 9.0, this app gives you the tools, feedback, and motivation to get there.
 
+[Live Demo](https://ielts-writing-boost.vercel.app)
 ## Why You'll Love IELTS Writing Booster
 
 - **Instant, Honest Grading:** Get your writing evaluated in seconds, with a clear band score and color-coded speedometer that makes your progress feel real and exciting.
