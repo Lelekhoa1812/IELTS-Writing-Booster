@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Enhancer</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="icon.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>IELTS Enhancer</h1>
+      <p>Boost your IELTS Writing with AI-powered feedback and guidance</p>
+    </header>
+    <form id="ielts-form">
+      <div class="selectors">
+        <label>
+          Desired Band:
+          <select id="band-select" required>
+            <option value="">Select Band</option>
+            <option value="4.5">4.5</option>
+            <option value="5.0">5.0</option>
+            <option value="5.5">5.5</option>
+            <option value="6.0">6.0</option>
+            <option value="6.5">6.5</option>
+            <option value="7.0">7.0</option>
+            <option value="7.5">7.5</option>
+            <option value="8.0">8.0</option>
+            <option value="8.5">8.5</option>
+            <option value="9.0">9.0</option>
+          </select>
+        </label>
+        <label>
+          Writing Part:
+          <select id="part-select" required>
+            <option value="">Select Part</option>
+            <option value="1">Part 1</option>
+            <option value="2">Part 2</option>
+          </select>
+        </label>
+      </div>
+      <div class="input-group">
+        <label for="question-input">Question (text and image if available):</label>
+        <textarea id="question-input" placeholder="Paste or type your IELTS question here..." rows="2"></textarea>
+        <input type="file" id="image-input" accept="image/*">
+        <div id="image-preview"></div>
+      </div>
+      <div class="input-group">
+        <label for="answer-input">Your Answer:</label>
+        <textarea id="answer-input" placeholder="Paste or type your answer here..." rows="6" required></textarea>
+      </div>
+      <button type="submit" id="submit-btn">Evaluate</button>
+    </form>
+    <section id="result-section" class="hidden">
+      <div class="gauge-container">
+        <svg id="gauge" width="220" height="120"></svg>
+        <div id="score-label"></div>
+      </div>
+      <div id="correction-output"></div>
+      <div id="model-answer-output"></div>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
