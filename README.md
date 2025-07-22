@@ -26,15 +26,25 @@ IELTS Enhancer is your personal, AI-powered writing coach designed to help you r
 <div align="center">
   <table>
     <tr>
-      <th colspan="3" style="text-align:center;"><strong>App Demo</strong></th>
+      <th colspan="2" style="text-align:center;"><strong>Question & Answer</strong></th>
+      <th colspan="2" style="text-align:center;"><strong>Grading & Correction</strong></th>
+      <th colspan="2" style="text-align:center;"><strong>Feedback & Polish</strong></th>
     </tr>
     <tr>
-      <td><img src="imgsrc/demo1.png" alt="Question & Notation" width="120" height="230"/></td>
+      <td><img src="imgsrc/demo1.png" alt="Question Notation" width="120" height="230"/></td>
       <td><img src="imgsrc/demo2.png" alt="Evaluate Answer" width="120" height="230"/></td>
       <td><img src="imgsrc/demo3.png" alt="Grading Answer" width="120" height="230"/></td>
       <td><img src="imgsrc/demo4.png" alt="Correcting Answer" width="120" height="230"/></td>
       <td><img src="imgsrc/demo5.png" alt="Aimed Answer" width="120" height="230"/></td>
       <td><img src="imgsrc/demo6.png" alt="Addtitional Feebacks" width="120" height="230"/></td>
+    </tr>
+    <tr>
+      <th colspan="1" style="text-align:center;"><strong>Question Notation</strong></th>
+      <th colspan="1" style="text-align:center;"><strong>Evaluate Answer</strong></th>
+      <th colspan="1" style="text-align:center;"><strong>Grading Answer</strong></th>
+      <th colspan="1" style="text-align:center;"><strong>Correcting Answer</strong></th>
+      <th colspan="1" style="text-align:center;"><strong>Aimed Answer</strong></th>
+      <th colspan="1" style="text-align:center;"><strong>Addtitional Feebacks</strong></th>
     </tr>
   </table>
 </div>
