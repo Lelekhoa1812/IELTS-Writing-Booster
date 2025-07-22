@@ -49,6 +49,11 @@ IELTS Enhancer is your personal, AI-powered writing coach designed to help you r
   </table>
 </div>
 
+**Dynamic AI Assistant:**
+<div align="center">
+  <img src="imgsrc/demo7.png" alt="AI assistant" width="100" height="230"/>
+</div>
+
 ---
 
 **IELTS Enhancer** is more than a tool—it's your partner on the road to IELTS success. Practice boldly, learn creatively, and watch your writing soar!
