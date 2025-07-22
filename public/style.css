@@ -295,3 +295,175 @@ input[type="file"] {
     font-size: 1rem;
   }
 }
+
+/* Draggable Chatbot Button */
+.draggable-chatbot {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+  box-shadow: 0 4px 24px #4b6cb766, 0 2px 8px #c3cfe2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  z-index: 1002;
+  transition: box-shadow 0.2s, background 0.2s;
+}
+.draggable-chatbot:hover {
+  box-shadow: 0 8px 32px #4b6cb799, 0 2px 8px #c3cfe2;
+  background: linear-gradient(135deg, #182848 0%, #4b6cb7 100%);
+}
+.chatbot-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Tooltip (native title used, but can be enhanced) */
+
+/* Chatbox Styles */
+.chatbox {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 340px;
+  max-width: 95vw;
+  background: #fff;
+  border-radius: 18px 18px 10px 10px;
+  box-shadow: 0 8px 32px #4b6cb799, 0 2px 8px #c3cfe2;
+  z-index: 1003;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInUp 0.5s;
+}
+.chatbox.hidden {
+  display: none;
+}
+.chatbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  color: #fff;
+  padding: 0.8em 1em;
+  border-radius: 18px 18px 0 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.close-chatbox {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: 900;
+  margin-left: 0.5em;
+}
+.chatbox-messages {
+  flex: 1;
+  padding: 1em;
+  overflow-y: auto;
+  max-height: 260px;
+  font-size: 1.01rem;
+  color: #222;
+}
+.chatbox-form {
+  display: flex;
+  border-top: 1px solid #c3cfe2;
+  padding: 0.7em 1em;
+  background: #f5f7fa;
+  border-radius: 0 0 10px 10px;
+}
+#chatbox-input {
+  flex: 1;
+  border: 1.5px solid #bfc9d9;
+  border-radius: 8px;
+  padding: 0.5em 0.8em;
+  font-size: 1rem;
+  background: #fff;
+  margin-right: 0.7em;
+  transition: border 0.2s;
+}
+#chatbox-input:focus {
+  border: 1.5px solid #4b6cb7;
+  outline: none;
+}
+.chatbox-form button[type="submit"] {
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5em 1.2em;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+.chatbox-form button[type="submit"]:hover {
+  background: linear-gradient(90deg, #182848 0%, #4b6cb7 100%);
+}
+
+/* Chat message bubbles */
+.chatbox-message-user {
+  background: #eaf1fb;
+  color: #222;
+  border-radius: 12px 12px 4px 12px;
+  padding: 0.6em 1em;
+  margin-bottom: 0.5em;
+  align-self: flex-end;
+  max-width: 80%;
+  word-break: break-word;
+}
+.chatbox-message-ai {
+  background: #f5f7fa;
+  color: #222;
+  border-radius: 12px 12px 12px 4px;
+  padding: 0.6em 1em;
+  margin-bottom: 0.5em;
+  align-self: flex-start;
+  max-width: 80%;
+  word-break: break-word;
+}
+
+/* Chatbot Markdown Custom Tags */
+h6 {
+  color: #1db954;
+  font-weight: 900;
+  font-size: 1.05em;
+  display: inline;
+  background: none;
+  margin: 0 0.1em;
+}
+h7 {
+  color: #e74c3c;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  font-size: 1.05em;
+  display: inline;
+  background: none;
+  margin: 0 0.1em;
+}
+p6 {
+  color: #4b6cb7;
+  background: #eaf1fb;
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-size: 0.98em;
+  display: inline;
+  margin: 0 0.1em;
+}
+p7 {
+  color: #f7971e;
+  font-style: italic;
+  font-size: 1em;
+  display: inline;
+  background: none;
+  margin: 0 0.1em;
+}

@@ -21,7 +21,8 @@ const loaderTips = [
   "Tip: Vary your sentence structures for higher bands.",
   "Remember: Check your grammar and punctuation!",
   "Tip: For Part 1, always compare key features in the data.",
-  "Fun fact: Examiners love clear topic sentences!"
+  "Fun fact: Examiners love clear topic sentences!",
+  "Tip: Ever heard of PER technique? This orientates your answer."
 ];
 
 function getRandomTip() {
