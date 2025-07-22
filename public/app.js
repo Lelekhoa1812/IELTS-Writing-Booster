@@ -118,6 +118,61 @@ function drawGauge(score) {
   scoreLabel.style.color = color;
 }
 
+// Add after main gauge rendering
+function drawSubMeters(scores) {
+  const subMeterContainer = document.getElementById('submeter-container');
+  subMeterContainer.innerHTML = '';
+  const criteria = [
+    { key: 'TR', label: 'TR', color: '#4b6cb7' },
+    { key: 'CC', label: 'CC', color: '#1db954' },
+    { key: 'LR', label: 'LR', color: '#f7971e' },
+    { key: 'GR', label: 'GR', color: '#a259ff' },
+  ];
+  criteria.forEach(({ key, label, color }) => {
+    const value = scores[key];
+    const percent = Math.max(0, Math.min(1, (value - 4.5) / (9.0 - 4.5)));
+    const angle = percent * 180;
+    const radius = 22;
+    const cx = 28, cy = 28;
+    const theta = (angle - 180) * Math.PI / 180;
+    const x = cx + radius * Math.cos(theta);
+    const y = cy + radius * Math.sin(theta);
+    const largeArc = angle > 180 ? 1 : 0;
+    const svg = `
+      <svg width="56" height="32">
+        <path d="M${cx - radius},${cy} A${radius},${radius} 0 1,1 ${cx + radius},${cy}" fill="none" stroke="#eee" stroke-width="7"/>
+        <path d="M${cx - radius},${cy} A${radius},${radius} 0 ${largeArc},1 ${x},${y}" fill="none" stroke="${color}" stroke-width="7" style="transition: stroke 0.5s;"/>
+        <circle cx="${x}" cy="${y}" r="4" fill="${color}" style="filter: drop-shadow(0 1px 2px #c3cfe2); transition: fill 0.5s;"/>
+        <text x="${cx}" y="30" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">${label}</text>
+      </svg>
+      <div class="submeter-score">${value ? value.toFixed(1) : '-'}</div>
+    `;
+    const div = document.createElement('div');
+    div.className = 'submeter';
+    div.innerHTML = svg;
+    subMeterContainer.appendChild(div);
+  });
+}
+
+function showCriteriaReasons(data) {
+  const reasons = [
+    { key: 'TR_reason', label: 'TR' },
+    { key: 'CC_reason', label: 'CC' },
+    { key: 'LR_reason', label: 'LR' },
+    { key: 'GR_reason', label: 'GR' },
+  ];
+  const reasonContainer = document.getElementById('criteria-reason-container');
+  reasonContainer.innerHTML = '';
+  reasons.forEach(({ key, label }) => {
+    if (data[key]) {
+      const div = document.createElement('div');
+      div.className = 'criteria-reason';
+      div.innerHTML = `<b>${label}:</b> ${data[key]}`;
+      reasonContainer.appendChild(div);
+    }
+  });
+}
+
 // Disable/enable form fields
 function setFormDisabled(disabled) {
   bandSelect.disabled = disabled;
@@ -178,6 +233,8 @@ form.addEventListener('submit', async function(e) {
     setTimeout(() => {
       stopLoaderTipRotation();
       drawGauge(data.score);
+      drawSubMeters(data);
+      showCriteriaReasons(data);
       correctionOutput.innerHTML = '<b>Correction & Guidance:</b><br>' + renderMarkdown(data.correction);
       modelAnswerOutput.innerHTML = '<b>Model Answer:</b><br>' + renderMarkdown(data.modelAnswer);
       setFormDisabled(false);
@@ -211,3 +268,18 @@ if (!document.getElementById('loader-style')) {
   `;
   document.head.appendChild(style);
 }
+
+// Note Card Show/Hide Logic
+const showNoteBtn = document.getElementById('show-note-btn');
+const hideNoteBtn = document.getElementById('hide-note-btn');
+const noteCard = document.getElementById('note-card');
+
+showNoteBtn.addEventListener('click', () => {
+  noteCard.classList.remove('hidden');
+  showNoteBtn.classList.add('hidden');
+});
+
+hideNoteBtn.addEventListener('click', () => {
+  noteCard.classList.add('hidden');
+  showNoteBtn.classList.remove('hidden');
+});

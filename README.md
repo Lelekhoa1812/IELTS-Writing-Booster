@@ -29,9 +29,12 @@ IELTS Enhancer is your personal, AI-powered writing coach designed to help you r
       <th colspan="3" style="text-align:center;"><strong>App Demo</strong></th>
     </tr>
     <tr>
-      <td><img src="imgsrc/demo1.png" alt="Question & Answer" width="150" height="230"/></td>
-      <td><img src="imgsrc/demo2.png" alt="Score & Feedback" width="150" height="230"/></td>
-      <td><img src="imgsrc/demo3.png" alt="Standard Answer" width="150" height="230"/></td>
+      <td><img src="imgsrc/demo1.png" alt="Question & Notation" width="120" height="230"/></td>
+      <td><img src="imgsrc/demo2.png" alt="Evaluate Answer" width="120" height="230"/></td>
+      <td><img src="imgsrc/demo3.png" alt="Grading Answer" width="120" height="230"/></td>
+      <td><img src="imgsrc/demo4.png" alt="Correcting Answer" width="120" height="230"/></td>
+      <td><img src="imgsrc/demo5.png" alt="Aimed Answer" width="120" height="230"/></td>
+      <td><img src="imgsrc/demo6.png" alt="Addtitional Feebacks" width="120" height="230"/></td>
     </tr>
   </table>
 </div>

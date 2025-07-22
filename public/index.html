@@ -46,6 +46,13 @@
         <input type="file" id="image-input" accept="image/*">
         <div id="image-preview"></div>
       </div>
+      <div id="note-card-container">
+        <button type="button" id="show-note-btn" class="note-btn">Create Note Card</button>
+        <div id="note-card" class="note-card hidden">
+          <textarea id="note-input" placeholder="Write your notes here..." rows="3"></textarea>
+          <button type="button" id="hide-note-btn" class="note-btn">Hide Note Card</button>
+        </div>
+      </div>
       <div class="input-group">
         <label for="answer-input">Your Answer:</label>
         <textarea id="answer-input" placeholder="Paste or type your answer here..." rows="6" required></textarea>
@@ -57,6 +64,8 @@
         <svg id="gauge" width="220" height="120"></svg>
         <div id="score-label"></div>
       </div>
+      <div id="submeter-container"></div>
+      <div id="criteria-reason-container"></div>
       <div id="correction-output"></div>
       <div id="model-answer-output"></div>
     </section>

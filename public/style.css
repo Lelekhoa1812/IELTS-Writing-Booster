@@ -170,6 +170,121 @@ input[type="file"] {
   100% { transform: scale(1); }
 }
 
+/* Note Card Styles */
+#note-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.2em 0 1.2em 0;
+  width: 100%;
+}
+
+.note-btn {
+  background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+  color: #222;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  padding: 0.7em 1.5em;
+  margin: 0.5em 0;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #f5f7fa, 0 4px 16px #ffd20022;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.note-btn:hover {
+  background: linear-gradient(90deg, #ffd200 0%, #f7971e 100%);
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 6px 24px #ffd20044;
+}
+
+.note-card {
+  background: #fffbe6;
+  border: 2.5px solid #ffd200;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(255, 215, 0, 0.13), 0 2px 8px #c3cfe2;
+  padding: 1.2em 1.2em 1em 1.2em;
+  margin-top: 0.7em;
+  margin-bottom: 0.7em;
+  width: 100%;
+  max-width: 480px;
+  animation: fadeIn 0.7s;
+  transition: box-shadow 0.2s, border 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.note-card textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #ffd200;
+  background: #fffde4;
+  padding: 1em;
+  font-size: 1.08rem;
+  margin-bottom: 1em;
+  resize: vertical;
+  min-height: 50px;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  color: #222;
+  box-shadow: 0 1px 4px #ffd20022;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.note-card textarea:focus {
+  border: 2.5px solid #f7971e;
+  outline: none;
+  box-shadow: 0 2px 12px #ffd20044;
+}
+
+.note-card.hidden {
+  display: none;
+}
+
+/* Submeter Styles */
+#submeter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.2em;
+  margin: 0.7em 0 0.2em 0;
+}
+.submeter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+}
+.submeter-score {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #4b6cb7;
+  margin-top: -0.2em;
+}
+
+#criteria-reason-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2em;
+  margin-bottom: 1.2em;
+}
+.criteria-reason {
+  background: #f5f7fa;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px #c3cfe2;
+  padding: 0.7em 1em;
+  font-size: 0.98rem;
+  color: #222;
+  min-width: 140px;
+  max-width: 220px;
+  margin: 0.2em 0;
+}
+
 @media (max-width: 700px) {
   .container {
     max-width: 98vw;
