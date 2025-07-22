@@ -123,13 +123,18 @@ function drawSubMeters(scores) {
   const subMeterContainer = document.getElementById('submeter-container');
   subMeterContainer.innerHTML = '';
   const criteria = [
-    { key: 'TR', label: 'TR', color: '#4b6cb7' },
-    { key: 'CC', label: 'CC', color: '#1db954' },
-    { key: 'LR', label: 'LR', color: '#f7971e' },
-    { key: 'GR', label: 'GR', color: '#a259ff' },
+    { key: 'TR', label: 'TR' },
+    { key: 'CC', label: 'CC' },
+    { key: 'LR', label: 'LR' },
+    { key: 'GR', label: 'GR' },
   ];
-  criteria.forEach(({ key, label, color }) => {
+  criteria.forEach(({ key, label }) => {
     const value = scores[key];
+    // Color logic as main gauge
+    let color = '#e74c3c'; // red
+    if (value >= 6 && value < 7) color = '#f1c40f'; // yellow
+    else if (value >= 7 && value < 8) color = '#1db954'; // green
+    else if (value >= 8) color = '#a259ff'; // purple
     const percent = Math.max(0, Math.min(1, (value - 4.5) / (9.0 - 4.5)));
     const angle = percent * 180;
     const radius = 22;
