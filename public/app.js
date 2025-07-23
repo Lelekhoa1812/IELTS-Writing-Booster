@@ -12,6 +12,7 @@ const scoreLabel = document.getElementById('score-label');
 const correctionOutput = document.getElementById('correction-output');
 const modelAnswerOutput = document.getElementById('model-answer-output');
 const submitBtn = document.getElementById('submit-btn');
+const wordCountDiv = document.getElementById('word-count');
 
 // Loader tips
 const loaderTips = [
@@ -200,9 +201,35 @@ function setFormDisabled(disabled) {
   }
 }
 
+function getWordCount(text) {
+  return text.trim().split(/\s+/).filter(Boolean).length;
+}
+
+function updateWordCount() {
+  const part = partSelect.value || '1';
+  const minWords = part === '2' ? 250 : 150;
+  const count = getWordCount(answerInput.value);
+  wordCountDiv.textContent = `${count}/${minWords}`;
+  wordCountDiv.style.color = count < minWords ? '#e74c3c' : '#1db954';
+}
+
+answerInput.addEventListener('input', updateWordCount);
+partSelect.addEventListener('change', updateWordCount);
+// Initialize on load
+updateWordCount();
+
 // Form submission
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
+  const part = partSelect.value || '1';
+  const minWords = part === '2' ? 250 : 150;
+  const count = getWordCount(answerInput.value);
+  if (count < minWords) {
+    const proceed = window.confirm(`Your answer is below the recommended word count (${minWords} words). Are you sure you want to proceed?`);
+    if (!proceed) {
+      return;
+    }
+  }
   setFormDisabled(true);
   resultSection.classList.remove('hidden');
   scoreLabel.textContent = '';
@@ -214,9 +241,7 @@ form.addEventListener('submit', async function(e) {
   setTimeout(startLoaderTipRotation, 50); // ensure DOM is updated
 
   const band = bandSelect.value;
-  const part = partSelect.value;
   const question = questionInput.value;
-  const answer = answerInput.value;
   let imageBase64 = '';
   if (imageInput.files[0]) {
     const file = imageInput.files[0];
@@ -232,7 +257,7 @@ form.addEventListener('submit', async function(e) {
     const res = await fetch('/evaluate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ band, part, question, answer, image: imageBase64 })
+      body: JSON.stringify({ band, part, question, answer: answerInput.value, image: imageBase64 })
     });
     const data = await res.json();
     // Animate gauge

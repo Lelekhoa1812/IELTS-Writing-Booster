@@ -74,4 +74,11 @@ chatboxForm.addEventListener('submit', async (e) => {
     chatboxMessages.removeChild(chatboxMessages.lastChild);
     appendMessage('<span style="color:#e74c3c">Error: Could not get response.</span>', false);
   }
+});
+
+// Auto-expand textarea from 2 to 5 lines
+chatboxInput.addEventListener('input', function() {
+  this.style.height = 'auto';
+  const maxHeight = 8.5 * 16; // 5 lines * 1.7em (approx 16px per em)
+  this.style.height = Math.min(this.scrollHeight, maxHeight) + 'px';
 }); 

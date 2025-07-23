@@ -56,6 +56,7 @@
       <div class="input-group">
         <label for="answer-input">Your Answer:</label>
         <textarea id="answer-input" placeholder="Paste or type your answer here..." rows="6" required></textarea>
+        <div id="word-count" style="margin-top:0.3em;font-weight:600;font-size:1.02em;"></div>
       </div>
       <button type="submit" id="submit-btn">Evaluate</button>
     </form>
@@ -82,7 +83,9 @@
     </div>
     <div id="chatbox-messages" class="chatbox-messages"></div>
     <form id="chatbox-form" class="chatbox-form">
-      <input type="text" id="chatbox-input" placeholder="Ask me anything about IELTS writing..." autocomplete="off" required />
+      <div class="chatbox-input-wrapper">
+        <textarea id="chatbox-input" placeholder="Ask me anything about IELTS writing..." autocomplete="off" required rows="2" maxlength="1000"></textarea>
+      </div>
       <button type="submit">Send</button>
     </form>
   </div>
