@@ -18,16 +18,14 @@ const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 function buildScoringPrompt({ band, part, question, answer }) {
   return `You are an IELTS Writing examiner and expert English teacher. The user wants to achieve Band ${band} in IELTS Writing Part ${part}.
 
-    1. Grade the user's answer (0-9, one decimal) as an IELTS examiner would, based on the question and the band target.
-    2. For each of the following criteria, give a band score (0-9, one decimal) and a 1-2 sentence justification:
+    For each of the following criteria, give a band score (0-9, one decimal) and a 1-2 sentence justification:
       - Task Response (TR): Fully addresses all parts of the task with well-developed ideas
       - Coherence & Cohesion (CC): Sequences information logically, uses a wide range of cohesive devices
       - Lexical Resource (LR): Uses uncommon vocabulary naturally, with few errors
       - Grammatical Range and Accuracy (GR): Uses a wide range of complex structures with mostly accurate control
 
-    Return JSON with keys: score, TR, CC, LR, GR, TR_reason, CC_reason, LR_reason, GR_reason. Example:
+    Return JSON with keys: TR, CC, LR, GR, TR_reason, CC_reason, LR_reason, GR_reason. Example:
     {
-      "score": 7.5,
       "TR": 7.0,
       "CC": 8.0,
       "LR": 7.5,
@@ -51,19 +49,32 @@ function buildScoringPrompt({ band, part, question, answer }) {
 function buildCorrectionPrompt({ band, part, question, answer }) {
   return `You are an IELTS Writing examiner and expert English teacher. The user wants to achieve Band ${band} in IELTS Writing Part ${part}.
 
-      1. Provide a correction of the user's answer in Markdown, using ~~...~~ for errors and **...** for fixes (show both in context, not just a rewrite).
-      2. Generate a model answer at the target band, and explain what the user should do to reach that level.
+    1. Provide a correction of the user's answer in Markdown, using ~~...~~ for errors and **...** for fixes (show both in context, not just a rewrite).
+    2. Generate a model answer at the target band, and explain what the user should do to reach that level.
 
-      Return JSON with keys: correction, modelAnswer. Correction must use Markdown as described.
+    Return your response as a single, valid JSON object with the following keys:
+    - correction (string, Markdown with ~~...~~ and **...** as described)
+    - modelAnswer (string, a model answer at the target band)
 
-      ---
+    IMPORTANT:
+    - Do NOT include any text, explanation, or markdown code block markers outside the JSON object.
+    - Do NOT wrap the JSON in triple backticks or any other formatting.
+    - Only output the JSON object, nothing else.
 
-      Question: ${question}
+    Example:
+    {
+      "correction": "Your ~~answr~~ **answer** is well structured.",
+      "modelAnswer": "Here is a model answer at Band ${band}..."
+    }
 
-      User's Answer:
-      ${answer}
-      `;
-      }
+    ---
+
+    Question: ${question}
+
+    User's Answer:
+    ${answer}
+    `;
+}
 
 // Attempt to fix/beautify malformed JSON from LLM
 function tryFixJson(str) {
@@ -110,8 +121,21 @@ app.post('/evaluate', async (req, res) => {
     let scoring = tryFixJson(scoringRes.text);
     if (!scoring) {
       // fallback: try to extract fields manually
-      scoring = { score: null, TR: null, CC: null, LR: null, GR: null, TR_reason: '', CC_reason: '', LR_reason: '', GR_reason: '' };
+      scoring = { TR: null, CC: null, LR: null, GR: null, TR_reason: '', CC_reason: '', LR_reason: '', GR_reason: '' };
     }
+
+    // Calculate average score from 4 criteria, rounded to nearest 0.5
+    function safeNum(val) {
+      const n = typeof val === 'string' ? parseFloat(val) : val;
+      return isNaN(n) ? 0 : n;
+      }
+      const tr = safeNum(scoring.TR);
+      const cc = safeNum(scoring.CC);
+      const lr = safeNum(scoring.LR);
+      const gr = safeNum(scoring.GR);
+      let avg = (tr + cc + lr + gr) / 4;
+      // Round to nearest 0.5 (can be 0.5 or 1 but not 0.25)
+      avg = Math.round(avg * 2) / 2;
 
     // 2. Correction/model answer call
     const correctionPrompt = buildCorrectionPrompt({ band, part, question, answer });
@@ -125,7 +149,7 @@ app.post('/evaluate', async (req, res) => {
     }
 
     res.json({
-      score: scoring.score,
+      score: avg,
       TR: scoring.TR,
       CC: scoring.CC,
       LR: scoring.LR,
